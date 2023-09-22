@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmfofms4qj0ac"]
+
+[ext_resource type="Script" path="res://Scripts/CameraRig.cs" id="1_cinqe"]
+
+[node name="CameraRig" type="Node3D"]
+script = ExtResource("1_cinqe")
+
+[node name="BaseCam" type="Camera3D" parent="."]
+cull_mask = 1047552
+
+[node name="BGviewContainer" type="SubViewportContainer" parent="BaseCam"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGview" type="SubViewport" parent="BaseCam/BGviewContainer"]
+transparent_bg = true
+handle_input_locally = false
+msaa_2d = 1
+msaa_3d = 1
+screen_space_aa = 1
+use_debanding = true
+use_occlusion_culling = true
+canvas_cull_mask = 4293918722
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="BackgroundCam" type="Camera3D" parent="BaseCam/BGviewContainer/BGview"]
+cull_mask = 1048062
+
+[node name="FGviewContainer" type="SubViewportContainer" parent="BaseCam"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FGview" type="SubViewport" parent="BaseCam/FGviewContainer"]
+transparent_bg = true
+handle_input_locally = false
+msaa_2d = 1
+msaa_3d = 1
+screen_space_aa = 1
+use_debanding = true
+use_occlusion_culling = true
+canvas_cull_mask = 4293918721
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="ForegroundCam" type="Camera3D" parent="BaseCam/FGviewContainer/FGview"]
+cull_mask = 1048061

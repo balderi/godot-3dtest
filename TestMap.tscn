@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://8r1de7y80auw"]
+
+[ext_resource type="PackedScene" uid="uid://cbgjet1gqonig" path="res://Player.tscn" id="1_6qb4o"]
+[ext_resource type="Texture2D" uid="uid://v4nymwykrmij" path="res://assets/textures/Dark/texture_04.png" id="1_s73vn"]
+[ext_resource type="PackedScene" uid="uid://bmfofms4qj0ac" path="res://CameraRig.tscn" id="2_c527k"]
+[ext_resource type="PackedScene" uid="uid://sfav2sojkbog" path="res://TestUI.tscn" id="4_aw8mv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wf5gc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_xdnoa"]
+sky_material = SubResource("ProceduralSkyMaterial_wf5gc")
+
+[sub_resource type="Environment" id="Environment_okm4u"]
+background_mode = 2
+sky = SubResource("Sky_xdnoa")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0ilt"]
+albedo_texture = ExtResource("1_s73vn")
+uv1_triplanar = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TestUI" parent="." instance=ExtResource("4_aw8mv")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_okm4u")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -0.5, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_d0ilt")
+use_collision = true
+size = Vector3(50, 1, 12)
+
+[node name="Wall" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, 1.5, -5.5)
+use_collision = true
+size = Vector3(49, 3, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0028, 1.5, 5.5)
+layers = 2
+use_collision = true
+size = Vector3(50, 3, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.5, 1.5, 0)
+use_collision = true
+size = Vector3(10, 3, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -43.5, 1.5, -0.5)
+layers = 2
+use_collision = true
+size = Vector3(11, 3, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(0.965926, 0.12941, -0.224144, 0.0669873, 0.711516, 0.699469, 0.25, -0.69065, 0.678603, 0, 5.16965, 0)
+light_color = Color(0.956863, 0.913725, 0.607843, 1)
+shadow_enabled = true
+directional_shadow_split_2 = 0.1
+directional_shadow_split_3 = 0.1
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 200.0
+directional_shadow_pancake_size = 0.1
+
+[node name="Player" parent="." instance=ExtResource("1_6qb4o")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
+
+[node name="CameraRig" parent="." instance=ExtResource("2_c527k")]
